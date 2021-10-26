@@ -4,6 +4,10 @@
         <title>¿Es viernes?</title>
     </head>
     <body>
-        {{esViernes}}
+        {% if esViernes %}
+            <h1>Por fin es viernes! 😎</h1>
+        {% else %}
+            <h1>Aún no... 😣</h1>
+        {% endif %}
     </body>
 </html>
