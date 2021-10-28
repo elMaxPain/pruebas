@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Alarmas!</title>
-    </head>
-    <body>
+{% extends alarmas/layout.html %}
+{% block body %}
         <h1>Alarmas del sistema</h1>
         <ul>
             {% for alarma in alarmas %}
                 <li>{{ alarma }}</li>
             {% endfor %}
         </ul>
-    </body>
-</html>
+{% endblock %}
