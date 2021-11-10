@@ -3,19 +3,18 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-alarmas = ['5:30', '5:35', '5:40', '5:50']
-
-# Create your views here.
-
 def index(request):
-    return render(request, 'alarmas/index.html', {'alarmas':alarmas})
+    if "alarmas" not in request.session:
+        request.session["alarmas"] = ['5:30', '5:35']
+    return render(request, 'alarmas/index.html', {'alarmas':request.session["alarmas"]})
 
 def v2(request):
     if request.method == 'POST':
         form = FNuevaAlarma(request.POST)
         if form.is_valid():
             alarma = form.cleaned_data['alarma']
-            alarmas.append(alarma)
+            # Validar si alarma está en el formato correcto
+            request.session["alarmas"] += [alarma]
             return HttpResponseRedirect(reverse('alarmas:index'))
         else:
             return render(request, 'alarmas/v2.html', {'cont_form':form})
