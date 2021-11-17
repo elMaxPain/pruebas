@@ -21,4 +21,5 @@ urlpatterns = [
     path('principal/', include('principal.urls')),
     path('dia/', include('dia.urls')),
     path('alarmas/', include('alarmas.urls')),
+    path('airline/', include('airline.urls')),
 ]
