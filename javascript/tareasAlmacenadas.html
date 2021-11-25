@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <script>
+            // Si no existe un valor para tareas, crea la key
+            // De no existir en el localStorage, el compaortamiento cuando
+            // busquemos el valor localStorage.getItem('tareas'); sería inesperado
+            if (!localStorage.getItem('tareas')) {
+                localStorage.setItem('tareas', "<li>Este es contenido que sólo aparecerá cuando el usuario ya hubiera entrado a la página en algún momento</li>");
+            }
+            //if (!localStorage.getItem('oculta')) {
+            //    localStorage.setItem('oculta', "f822102f4515609fc31927a84c6db7f8");
+            //}
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Obtener las tareas almacenadas en el localStorage
+                // y reemplaza el contenido de la lista no ordenada
+                document.querySelector('#tareas').innerHTML = localStorage.getItem('tareas');
+
+                //Código para agregar a la lista una nueva tarea
+                const enviar = document.querySelector('#enviar');
+                const nuevaTarea = document.querySelector('#tarea');
+
+                // Activa y desactiva el botón de submit del formulario
+                // cuando el contenido del input es vacío = disabled = true
+                enviar.disabled = true;
+                nuevaTarea.onkeyup = () => {
+                    if (nuevaTarea.value.length > 0) {
+                        enviar.disabled = false;
+                    } else {
+                        enviar.disabled = true;
+                    }
+                }
+
+                document.querySelector('form').onsubmit = () => {
+                    //Código para agregar una tarea a la lista
+                    const tarea = nuevaTarea.value;
+                    const li = document.createElement('li');
+                    li.innerHTML = tarea;
+                    document.querySelector('#tareas').append(li);
+                    nuevaTarea.value = '';
+                    enviar.disabled = true;
+                    //Se almacena (reemplaza) el contenido de la lista en el localStorage
+                    let tareas = document.querySelector('#tareas').innerHTML;
+                    localStorage.setItem('tareas', tareas);
+
+                    // Evita que el envío del formulario recargue la página
+                    return false;
+                }
+            });
+        </script>
+        <title>Almacenamiento Local</title>
+    </head>
+    <body>
+        <ul id="tareas">
+        </ul>
+        <form>
+            <input id="tarea" autocomplete="off" autofocus placeholder="Nueva tarea" type="text">
+            <input id="enviar" type="submit">
+        </form>
+    </body>
+</html>
