@@ -6,7 +6,8 @@
             // De no existir en el localStorage, el compaortamiento cuando
             // busquemos el valor localStorage.getItem('tareas'); sería inesperado
             if (!localStorage.getItem('tareas')) {
-                localStorage.setItem('tareas', "<li>Este es contenido que sólo aparecerá cuando el usuario ya hubiera entrado a la página en algún momento</li>");
+                //localStorage.setItem('tareas', "<li>Este es contenido que sólo aparecerá cuando el usuario ya hubiera entrado a la página en algún momento</li>");
+                localStorage.setItem('tareas', "<li></li>");
             }
             //if (!localStorage.getItem('oculta')) {
             //    localStorage.setItem('oculta', "f822102f4515609fc31927a84c6db7f8");
